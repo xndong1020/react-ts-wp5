@@ -1,6 +1,6 @@
 import React from "react";
 import { Router } from "react-router-dom";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { createBrowserHistory } from "history";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
@@ -25,12 +25,15 @@ const history = createBrowserHistory();
 //   tracesSampleRate: 1.0,
 // });
 
-render(
+const container = document.getElementById("root");
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = createRoot(container!);
+
+root.render(
   <Router history={history}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes />
     </ThemeProvider>
   </Router>,
-  document.getElementById("root"),
 );
