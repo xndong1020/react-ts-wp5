@@ -1,20 +1,16 @@
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { LoginPage } from './pages/Auth/LoginPage';
-import { CreateAccountPage } from './pages/Auth/CreateAccountPage';
-
-
-
-
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { LoginPage } from "./pages/Auth/LoginPage";
+import { CreateAccountPage } from "./pages/Auth/CreateAccountPage";
 
 /**
  * @MAIN ROUTE FILE
  */
 
-export const Routes = (): JSX.Element => {
+export const AppRoutes = (): JSX.Element => {
   return (
     <>
       {/* <Backdrop
@@ -23,12 +19,13 @@ export const Routes = (): JSX.Element => {
       >
         <CircularProgress color="inherit" />
       </Backdrop> */}
-      <Switch>
+      <Routes>
         {/* because we don't have exact props here so '/admin/dashboard' will navigate to homepage here */}
-        <Route path="/login" component={LoginPage} />
-        <Route path="/createAccount" component={CreateAccountPage} />
-        <Redirect from="/" to="/login" />
-      </Switch>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/createAccount" element={<CreateAccountPage />} />
+        {/* <Redirect from="/" to="/login" /> */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
     </>
   );
 };

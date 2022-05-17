@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { createBrowserHistory } from "history";
 import * as Sentry from "@sentry/react";
@@ -7,8 +7,10 @@ import { Integrations } from "@sentry/tracing";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { Routes } from "./Routes";
+import { AppRoutes } from "./Routes";
 import { theme } from "./theme";
+import { CreateAccountPage } from "./pages/Auth/CreateAccountPage";
+import { LoginPage } from "./pages/Auth/LoginPage";
 
 const history = createBrowserHistory();
 
@@ -30,10 +32,10 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 
 root.render(
-  <Router history={history}>
+  <BrowserRouter>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Routes />
+      <AppRoutes />
     </ThemeProvider>
-  </Router>,
+  </BrowserRouter>,
 );
